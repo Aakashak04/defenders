@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY defender/main.py /app/defender/main.py
 COPY defender/__init__.py /app/defender/__init__.py
+COPY anomaly_detection /app/anomaly_detection
 
 ENV DEFENDER_DB=/app/events.db
 ENV ORIGIN=http://host.docker.internal:8000
