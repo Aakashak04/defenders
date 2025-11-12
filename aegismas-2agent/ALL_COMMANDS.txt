@@ -1,0 +1,163 @@
+================================================================================
+AegisMAS-2Agent - Complete Command Reference
+================================================================================
+
+✅ BUILD STATUS: COMPLETE
+✅ TRAINING DATA: GENERATED (500 benign + 200 malicious samples)
+✅ LSTM MODEL: TRAINED (models/lstm_model.pt)
+
+================================================================================
+1. BUILD THE AGENT
+================================================================================
+
+cd aegismas-2agent
+docker compose build
+
+Status: ✅ Already built!
+
+================================================================================
+2. TRAIN MODELS
+================================================================================
+
+# Generate training data (DONE ✅)
+python scripts/gen_synthetic.py
+
+# Train LSTM model (DONE ✅)
+python scripts/train_lstm.py --epochs 5
+
+# Optional: Train statistical model (runs in bootstrap mode if skipped)
+# See QUICKSTART.md for Python script
+
+================================================================================
+3. RUN THE DEFENDER
+================================================================================
+
+# Start all services (Envoy + AegisMAS API + Redis)
+docker compose up -d
+
+# View logs
+docker compose logs -f
+
+# Stop defender
+docker compose down
+
+# Restart
+docker compose restart
+
+================================================================================
+4. RUN THE ATTACKER
+================================================================================
+
+# Test WITHOUT defender (direct to bank at localhost:8000)
+python attack_simulator.py --defender off
+
+# Test WITH defender (through Envoy gateway at localhost:8085)
+python attack_simulator.py --defender on
+
+# Quiet mode (summary only)
+python attack_simulator.py --defender on --quiet
+
+================================================================================
+5. VIEW RESULTS
+================================================================================
+
+# Health check
+curl http://localhost:8080/health
+
+# View all events
+curl http://localhost:8080/v1/events
+
+# View only blocked events
+curl "http://localhost:8080/v1/events?decision=block"
+
+# View metrics
+curl http://localhost:8080/metrics
+
+# PowerShell alternative
+Invoke-WebRequest -Uri "http://localhost:8080/v1/events?decision=block" | Select-Object -ExpandProperty Content | ConvertFrom-Json | ConvertTo-Json -Depth 10
+
+================================================================================
+6. COMPLETE WORKFLOW
+================================================================================
+
+# Navigate to project
+cd aegismas-2agent
+
+# Start defender
+docker compose up -d
+
+# Wait for services (10 seconds)
+Start-Sleep -Seconds 10
+
+# Test with defender ON
+python attack_simulator.py --defender on
+
+# View blocked events
+curl "http://localhost:8080/v1/events?decision=block"
+
+# View metrics
+curl http://localhost:8080/metrics
+
+# Stop when done
+docker compose down
+
+================================================================================
+7. TROUBLESHOOTING
+================================================================================
+
+# Check services status
+docker compose ps
+
+# View logs
+docker compose logs aegismas-api
+docker compose logs envoy
+
+# Rebuild and restart
+docker compose up --build -d
+
+# Check bank is running
+curl http://localhost:8000/health
+
+# Test Envoy directly
+curl http://localhost:8085/health
+
+================================================================================
+EXPECTED RESULTS
+================================================================================
+
+DEFENDER OFF:
+- Total Attacks: ~74
+- Allowed: ~60-70 (80-95%)
+- Blocked: 0-5 (0-7%)
+
+DEFENDER ON:
+- Total Attacks: ~74
+- Allowed: ~20-30 (30-40%)
+- Blocked: ~40-50 (55-70%)
+
+The defender blocks:
+✅ SQL injection attacks
+✅ Path traversal attempts
+✅ Rapid fire requests
+✅ Suspicious patterns
+
+================================================================================
+SERVICES
+================================================================================
+
+- Envoy Gateway:    http://localhost:8085 (entry point)
+- AegisMAS API:     http://localhost:8080 (decision engine)
+- Redis:            Internal (rate limiting)
+- Bank (your app):  http://localhost:8000 (protected target)
+
+================================================================================
+FILES
+================================================================================
+
+- START_HERE.md     - Quick start guide
+- QUICKSTART.md     - Complete documentation
+- COMMANDS.md       - Cheat sheet
+- README.md         - Full project docs
+
+================================================================================
+

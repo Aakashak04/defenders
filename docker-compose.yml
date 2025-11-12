@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  defender:
+    build:
+      context: .
+      dockerfile: defender/Dockerfile
+    container_name: simple-defender
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./defender:/app/data
+    environment:
+      - DEFENDER_DB=/app/data/events.db
+      - ORIGIN=http://host.docker.internal:8000
+    networks:
+      - defender-net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    container_name: simple-gateway
+    ports:
+      - "8086:8085"
+    depends_on:
+      - defender
+    environment:
+      - DEFENDER_URL=http://defender:8080/v1/decide
+      - ORIGIN=http://host.docker.internal:8000
+    networks:
+      - defender-net
+
+networks:
+  defender-net:
+    driver: bridge
+

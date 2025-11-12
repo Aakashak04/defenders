@@ -1,0 +1,11 @@
+{
+  "bank": {
+    "origin": "http://host.docker.internal:8000",
+    "cluster": "real_bank_backend",
+    "posture": "fail-open"
+  }
+}
+
+
+
+

@@ -1,0 +1,34 @@
+================================================================================
+QUICK FIX FOR DEFENDER ERRORS
+================================================================================
+
+PROBLEM: Everything shows as errors when defender is ON
+
+SOLUTION:
+================================================================================
+
+1. Stop everything
+   docker compose down
+
+2. Start defender
+   docker compose up -d
+
+3. Wait 15 seconds
+   Start-Sleep -Seconds 15
+
+4. Verify services
+   python diagnose.py
+
+5. Test again
+   python attack_simulator.py --defender on
+
+================================================================================
+
+If diagnose.py shows all ✅, then run the attacker.
+
+If still errors, check logs:
+   docker compose logs aegismas-api
+   docker compose logs envoy
+
+================================================================================
+

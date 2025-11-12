@@ -1,0 +1,51 @@
+================================================================================
+QUICK TEST COMMANDS - COPY & PASTE
+================================================================================
+
+TEST WITHOUT DEFENDER (Direct to Bank)
+================================================================================
+
+# Stop defender
+docker compose down
+
+# Run attacks
+python attack_simulator.py --defender off
+
+Expected: Many ✅ ALLOWED (attacks reach bank)
+
+
+================================================================================
+TEST WITH DEFENDER (Through Gateway)
+================================================================================
+
+# Start defender
+docker compose up -d
+
+# Wait 10 seconds
+Start-Sleep -Seconds 10
+
+# Run attacks
+python attack_simulator.py --defender on
+
+Expected: Many 🛑 BLOCKED (defender stops attacks)
+
+
+================================================================================
+VIEW RESULTS
+================================================================================
+
+# View blocked events
+curl "http://localhost:8080/v1/events?decision=block"
+
+# View metrics
+curl http://localhost:8080/metrics
+
+
+================================================================================
+STOP WHEN DONE
+================================================================================
+
+docker compose down
+
+================================================================================
+

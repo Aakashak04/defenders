@@ -1,0 +1,444 @@
+{
+  "base_url": "http://localhost:8000",
+  "accessible": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/health",
+      "method": "GET",
+      "status": 200,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"status\":\"ok\"}"
+    },
+    {
+      "path": "/healthz",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/status",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/ping",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/users",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/user",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/accounts",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/account",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/transactions",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/transaction",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/auth",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/login",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/logout",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/register",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/profile",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/balance",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/transfer",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/deposit",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/withdraw",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/admin",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/admin/users",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/admin/accounts",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/api/admin",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/docs",
+      "method": "GET",
+      "status": 200,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "body_sample": "\n    <!DOCTYPE html>\n    <html>\n    <head>\n    <link type=\"text/css\" rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.9.0/swagger-ui.css\">\n    <link rel=\"shortcut icon\" href=\"http"
+    },
+    {
+      "path": "/swagger",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/swagger.json",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/openapi.json",
+      "method": "GET",
+      "status": 200,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"openapi\":\"3.1.0\",\"info\":{\"title\":\"Virtual Bank API\",\"version\":\"1.0.0\"},\"paths\":{\"/auth/register\":{\"post\":{\"tags\":[\"Authentication\"],\"summary\":\"Register\",\"description\":\"Register a new user\",\"operatio"
+    },
+    {
+      "path": "/api/docs",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/redoc",
+      "method": "GET",
+      "status": 200,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "text/html; charset=utf-8"
+      },
+      "body_sample": "\n    <!DOCTYPE html>\n    <html>\n    <head>\n    <title>Virtual Bank API - ReDoc</title>\n    <!-- needed for adaptive design -->\n    <meta charset=\"utf-8\"/>\n    <meta name=\"viewport\" content=\"width=devi"
+    },
+    {
+      "path": "/v1",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/v1/health",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/v1/users",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/v1/accounts",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/version",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    },
+    {
+      "path": "/info",
+      "method": "GET",
+      "status": 404,
+      "accessible": true,
+      "headers": {
+        "Server": "uvicorn",
+        "Content-Type": "application/json"
+      },
+      "body_sample": "{\"detail\":\"Not Found\"}"
+    }
+  ],
+  "discovered_from_docs": [
+    "/auth/refresh",
+    "/accounts",
+    "/auth/logout",
+    "/auth/login",
+    "/accounts/{account_id}",
+    "/accounts/{account_id}/unfreeze",
+    "/admin/analytics",
+    "/health",
+    "/accounts/{from_id}/transfer",
+    "/auth/register",
+    "/admin/audit-logs",
+    "/accounts/{account_id}/freeze",
+    "/transactions"
+  ],
+  "summary": {
+    "total_probed": 38,
+    "accessible": 38,
+    "inaccessible": 0,
+    "errors": 0
+  }
+}

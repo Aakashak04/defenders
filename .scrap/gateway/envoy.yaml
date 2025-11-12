@@ -1,0 +1,114 @@
+static_resources:
+  listeners:
+  - name: listener_http
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          use_remote_address: true
+          xff_num_trusted_hops: 0
+          request_id_extension:
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.request_id.uuid.v3.UuidRequestIdConfig
+              use_request_id_for_trace_sampling: true
+          http_filters:
+          - name: envoy.filters.http.ext_authz
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.ext_authz.v3.ExtAuthz
+              transport_api_version: V3
+              with_request_body:
+                max_request_bytes: 8192
+                allow_partial_message: true
+                pack_as_bytes: true
+              include_peer_certificate: false
+              filter_enabled:
+                runtime_key: ext_authz.enabled
+                default_value:
+                  numerator: 100
+                  denominator: HUNDRED
+              failure_mode_allow: false
+              clear_route_cache: true
+              http_service:
+                path_prefix: /v1/decide
+                server_uri:
+                  uri: http://aegismas-api:8080
+                  cluster: aegismas_api
+                  timeout: 2s
+                authorization_request:
+                  allowed_headers:
+                    patterns:
+                      - exact: ":method"
+                      - exact: ":path"
+                      - exact: ":authority"
+                      - exact: "x-forwarded-for"
+                      - safe_regex:
+                          google_re2: {}
+                          regex: "x-.*"
+                authorization_response:
+                  allowed_upstream_headers:
+                    patterns:
+                      - exact: "x-aegis-tenant"
+                      - exact: "x-aegis-origin"
+                  allowed_client_headers:
+                    patterns:
+                      - exact: "content-type"
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: all_hosts
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster_header: "x-aegis-origin"
+                  timeout: 30s
+                  retry_policy:
+                    retry_on: "5xx"
+                    num_retries: 1
+  clusters:
+  - name: aegismas_api
+    type: STRICT_DNS
+    connect_timeout: 2s
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: aegismas_api
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: aegismas-api
+                port_value: 8080
+  - name: real_bank_backend
+    type: STRICT_DNS
+    connect_timeout: 2s
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: real_bank_backend
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: host.docker.internal
+                port_value: 8000
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 9901
+
+
+
+

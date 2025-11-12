@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.30.1
+    container_name: aegismas-envoy
+    ports:
+      - "8085:8085"
+    volumes:
+      - ./gateway/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - aegismas-api
+    networks:
+      - aegis
+
+  aegismas-api:
+    build:
+      context: ./aegismas_api
+      dockerfile: Dockerfile
+    working_dir: /app
+    container_name: aegismas-api
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - AEGIS_API_HOST=0.0.0.0
+      - AEGIS_API_PORT=8080
+      - AEGIS_ORIGIN_URL=http://host.docker.internal:8000
+      - EVENTS_DB_PATH=/app/aegismas_api/events.db
+      - MODELS_DIR=/app/aegismas_api/models
+      - FAILURE_MODE_ALLOW=true
+    volumes:
+      - ./aegismas_api/events.db:/app/aegismas_api/events.db
+      - ./aegismas_api/models:/app/aegismas_api/models
+    ports:
+      - "9000:8080"
+    depends_on:
+      - redis
+    networks:
+      - aegis
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: aegismas-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    networks:
+      - aegis
+
+networks:
+  aegis: {}
+
+volumes:
+  redis-data: {}
+

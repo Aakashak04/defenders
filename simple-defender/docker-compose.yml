@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  envoy:
+    image: envoyproxy/envoy:v1.30.1
+    container_name: simple-defender-envoy
+    ports:
+      - "8085:8085"
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - defender_api
+    networks:
+      - defender
+
+  defender_api:
+    build:
+      context: ./aegismas
+      dockerfile: Dockerfile
+    container_name: simple-defender-api
+    ports:
+      - "9001:8080"
+    networks:
+      - defender
+
+networks:
+  defender: {}
+
