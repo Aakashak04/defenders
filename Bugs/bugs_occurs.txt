@@ -1,0 +1,15 @@
+1. ML fallback initialization bug: If the advanced anomaly detector fails to import, the application may crash because a required availability flag is not initialized.
+
+2. Fail-open security vulnerability: If the defender service becomes unavailable, the gateway may allow requests to pass through without security inspection.
+
+3. Incorrect attack-test results: The testing script may incorrectly classify server errors as successful attacks or allowed requests, making the security evaluation unreliable.
+
+4. Unbounded memory growth: The traffic tracker retains statistics for client IP addresses indefinitely, potentially causing memory consumption to increase over time.
+
+5. Docker networking compatibility issue: The application may fail to connect to host services on some Linux systems because host.docker.internal is not automatically configured.
+
+6. Potential false positives and false negatives: The anomaly detection system may incorrectly flag legitimate traffic as malicious or fail to detect actual attacks.
+
+7. Potential concurrency issues: Simultaneous requests may cause inconsistent traffic statistics or race conditions if shared state is updated without proper synchronization.
+
+8. Insufficient failure handling: Unexpected exceptions or unavailable dependencies may interrupt request processing if they are not handled appropriately.
