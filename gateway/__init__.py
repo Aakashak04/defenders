@@ -1,2 +1,1 @@
-# Gateway package
-
+Added origin URL initialization for the gateway
