@@ -1,2 +1,1 @@
-# Gateway package
-
+Corrected initialization code

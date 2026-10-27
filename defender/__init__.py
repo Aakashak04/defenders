@@ -1,2 +1,1 @@
-# Defender package
-
+Corrected initialization code
